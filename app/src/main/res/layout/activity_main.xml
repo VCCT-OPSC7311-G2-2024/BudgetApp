@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Logo Image -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="414dp"
+        android:layout_height="397dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-60dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/lblWelcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-26dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="WELCOME TO
+                      MONEY MAP!"
+        android:textColor="#4CAF50"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnMainLogin"
+        android:layout_width="292dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/rounded_button"
+        android:padding="16dp"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="29sp" />
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/btnMainSignUp"
+        android:layout_width="285dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/rounded_button"
+        android:padding="16dp"
+        android:text="Sign up"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="29sp" />
+
+</LinearLayout>

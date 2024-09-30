@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Home Button -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- Home Button -->
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOME"
+            android:textColor="#4CAF50"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+    <!-- Savings Header and Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp">
+
+        <!-- Savings Header -->
+        <TextView
+            android:id="@+id/lblSavingsHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="SAVINGS"
+            android:textColor="#000000"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <!-- Savings Icon -->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/savings" />
+    </LinearLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Create a Saving Header -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREATE A SAVING"
+        android:textColor="#4CAF50"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Name Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAME"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/txtSavingName"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="  Enter Name" />
+    </LinearLayout>
+
+    <!-- Allocated Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ALLOCATED"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/txtAllocated"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="  Enter Amount" />
+    </LinearLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Create Button -->
+    <Button
+        android:id="@+id/btnCreateSaving"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_button_background"
+        android:text="CREATE"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- Footer Links -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:id="@+id/lblHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HELP"
+            android:textColor="#4CAF50"
+            android:textSize="14sp"
+            android:onClick="onHelpClick"
+            android:layout_marginStart="20dp" />
+
+        <TextView
+            android:id="@+id/lblContactUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTACT US"
+            android:textColor="#4CAF50"
+            android:textSize="14sp"
+            android:onClick="onContactClick"
+            android:layout_marginLeft="220dp"/>
+    </LinearLayout>
+
+</LinearLayout>

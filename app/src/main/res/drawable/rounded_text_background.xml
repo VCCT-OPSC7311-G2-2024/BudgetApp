@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color -->
+    <solid android:color="#E0E0E0" /> <!-- You can change the color here -->
+
+    <!-- Rounded corners -->
+    <corners android:radius="12dp" />
+
+    <!-- Optional: Padding inside the text block -->
+    <padding
+        android:left="16dp"
+        android:right="16dp"
+        android:top="12dp"
+        android:bottom="12dp" />
+
+    <!-- Optional: Border (stroke) around the block -->
+    <stroke
+        android:width="2dp"
+        android:color="#4CAF50" /> <!-- You can change the stroke color here -->
+</shape>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Logo and App Title-->
+
+    <!-- Welcome Text -->
+    <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="158dp"
+        android:layout_marginLeft="-20dp"
+        android:layout_marginBottom="-10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <!-- Logo Image -->
+
+        <!-- App Title -->
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="193dp"
+            android:layout_height="180dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="-50dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/lblAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-20dp"
+            android:layout_marginTop="73dp"
+            android:gravity="center"
+            android:text="MONEY MAP"
+            android:textColor="#000000"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WELCOME (USER)"
+        android:textColor="#4CAF50"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="16dp" />
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#000000"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bank Button and Icon -->
+    <LinearLayout
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Bank Button -->
+        <Button
+            android:id="@+id/btnBank"
+            android:layout_marginRight="20dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button_background"
+            android:gravity="center"
+            android:text="BANK"
+            android:textAllCaps="false"
+            android:textColor="#000000" /> <!-- Text color changed to black -->
+
+        <!-- Bank Icon -->
+        <ImageView
+            android:id="@+id/imgBankIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/bank" />
+    </LinearLayout>
+
+    <!-- com.example.opsc7312.api.Budget Button and Icon -->
+
+    <!-- Savings Button and Icon -->
+    <LinearLayout
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- com.example.opsc7312.api.Budget Button -->
+
+        <!-- com.example.opsc7312.api.Budget Icon -->
+        <Button
+            android:id="@+id/btnBudget"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rounded_button_background"
+            android:gravity="center"
+            android:text="BUDGET"
+            android:textAllCaps="false"
+            android:textColor="#000000" />
+
+        <ImageView
+            android:id="@+id/imgBudgetIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/budget" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="306dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Savings Button -->
+        <Button
+            android:id="@+id/btnSavings"
+            android:layout_width="150dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button_background"
+            android:gravity="center"
+            android:text="SAVINGS"
+            android:textAllCaps="false"
+            android:textColor="#000000" />
+        <!-- Savings Icon -->
+        <ImageView
+            android:id="@+id/imgSavingsIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/savings" />
+    </LinearLayout>
+
+    <!-- Settings Button and Icon -->
+    <LinearLayout
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Settings Button -->
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button_background"
+            android:gravity="center"
+            android:text="SETTINGS"
+            android:layout_marginRight="20dp"
+            android:textAllCaps="false"
+            android:textColor="#000000" />
+
+        <!-- Settings Icon -->
+        <ImageView
+            android:id="@+id/imgSettingsIcon"
+            android:layout_width="80dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/settings" />
+    </LinearLayout>
+
+    <!-- Footer Links -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:id="@+id/lblHelp"
+            android:layout_marginRight="250dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HELP"
+            android:textColor="#4CAF50"
+            android:textSize="14sp"
+            android:layout_gravity="start" />
+
+        <TextView
+            android:id="@+id/lblContactUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTACT US"
+            android:textColor="#4CAF50"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="end" />
+
+        <!-- Home Button -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="98dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="-237dp"
+            android:background="@android:color/transparent"
+            android:gravity="center|top"
+            android:text="LOG OUT"
+            android:textColor="#4CAF50"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

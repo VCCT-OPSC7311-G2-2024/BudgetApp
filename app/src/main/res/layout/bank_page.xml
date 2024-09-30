@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Home Button -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- Home Button -->
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOME"
+            android:textColor="#4CAF50"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+    <!-- Bank Header and Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp">
+
+
+        <!-- Bank Icon -->
+        <TextView
+            android:id="@+id/lblBankHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="18dp"
+            android:gravity="center"
+            android:text="BANK"
+            android:textColor="#000000"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/bank" />
+    </LinearLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#000000"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Accounts Section Header -->
+    <TextView
+        android:id="@+id/lblAccountsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACCOUNTS"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Accounts Dropdown (Spinner) -->
+    <Spinner
+        android:id="@+id/spnAccounts"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/edit_text_background"
+        android:prompt="@string/select_account"
+        android:spinnerMode="dropdown" />
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#000000"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Create, Edit, and Delete Buttons with Icons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Create Button -->
+            <Button
+                android:id="@+id/btnMainBankCreate"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/rounded_button_background"
+                android:text="CREATE"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAllCaps="false" />
+
+            <!-- Edit Button -->
+            <Button
+                android:id="@+id/btnMainBankEdit"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_button_background"
+                android:text="EDIT"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAllCaps="false" />
+
+            <!-- Delete Button -->
+            <Button
+                android:id="@+id/btnMainDeleteBank"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_button_background"
+                android:text="DELETE"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <!-- Plus, Edit, and Delete Icons -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <!-- Create Icon -->
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/create" />
+
+            <!-- Edit Icon -->
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/edit" />
+
+            <!-- Delete Icon -->
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/delete" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#000000"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Footer Links -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:id="@+id/lblHelp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="HELP"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:onClick="onHelpClick"
+            android:layout_marginStart="20dp" />
+
+        <TextView
+            android:id="@+id/lblContactUs"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="CONTACT US"
+            android:layout_marginStart="200dp"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:onClick="onContactClick"
+            android:layout_marginEnd="24dp" />
+    </LinearLayout>
+
+</LinearLayout>
