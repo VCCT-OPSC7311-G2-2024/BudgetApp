@@ -34,7 +34,6 @@
         android:gravity="center_horizontal"
         android:layout_marginBottom="16dp">
 
-        <!-- Settings Header -->
         <TextView
             android:id="@+id/lblSettingsHeader"
             android:layout_width="wrap_content"
@@ -45,7 +44,6 @@
             android:textSize="36sp"
             android:textStyle="bold" />
 
-        <!-- Settings Icon -->
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -61,6 +59,18 @@
         android:layout_marginBottom="16dp" />
 
     <!-- Profile Information Card -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="16dp"
+        android:elevation="8dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="16dp">
+
+        <!-- Profile Information Card -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -173,12 +183,18 @@
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
-            <!-- Security and Privacy -->
+        </LinearLayout>
+        <!-- Security and Privacy -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="16dp"
                 android:gravity="center_vertical">
 
                 <TextView
@@ -196,39 +212,29 @@
                     android:src="@drawable/security" />
             </LinearLayout>
 
-            <!-- About Money Map -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Biometric Authentication Switch -->
+            <Switch
+                android:id="@+id/switchBiometric"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical">
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:text="Biometric Authentication"
+                android:textColor="#000000"
+                android:textSize="14sp"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="ABOUT MONEY MAP"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/info" />
-            </LinearLayout>
+            <!-- Biometric Status Text -->
+            <TextView
+                android:id="@+id/tvBiometricStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:textSize="12sp"
+                android:textColor="#666666"/>
         </LinearLayout>
 
-        <!-- Version Text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VER 23.42.511"
-            android:textColor="#000000"
-            android:textSize="12sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp" />
+
     </LinearLayout>
 
     <!-- Footer Links -->
@@ -259,4 +265,5 @@
             android:textSize="18sp" />
     </LinearLayout>
 
+</LinearLayout>
 </LinearLayout>

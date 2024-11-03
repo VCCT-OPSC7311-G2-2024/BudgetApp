@@ -15,11 +15,9 @@
         android:gravity="center_vertical"
         android:layout_marginBottom="16dp">
 
-        <!-- Home Button -->
         <Button
             android:id="@+id/btnHome"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="-13dp"
             android:layout_height="wrap_content"
             android:text="HOME"
             android:textColor="#4CAF50"
@@ -28,7 +26,7 @@
             android:background="@android:color/transparent"/>
     </LinearLayout>
 
-    <!-- com.example.opsc7312.api.Budget Header and Icon -->
+    <!-- Budget Header and Icon -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,23 +34,20 @@
         android:gravity="center_horizontal"
         android:layout_marginBottom="24dp">
 
-        <!-- com.example.opsc7312.api.Budget Header -->
         <TextView
             android:id="@+id/lblBudgetHeader"
             android:layout_width="192dp"
             android:layout_height="54dp"
-            android:layout_marginLeft="6dp"
             android:gravity="center"
             android:text="BUDGET"
             android:textColor="#000000"
             android:textSize="44sp"
             android:textStyle="bold" />
 
-        <!-- com.example.opsc7312.api.Budget Icon -->
         <ImageView
             android:layout_width="80dp"
-            android:layout_marginLeft="60dp"
             android:layout_height="80dp"
+            android:layout_marginLeft="60dp"
             android:src="@drawable/budget" />
     </LinearLayout>
 
@@ -63,7 +58,7 @@
         android:background="#000000"
         android:layout_marginBottom="24dp" />
 
-    <!-- Month Dropdown -->
+    <!-- Account Dropdown -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,168 +68,64 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Budget Catagory (Under Development)"
+            android:text="SELECT ACCOUNT"
             android:textColor="#4CAF50"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
         <Spinner
-            android:id="@+id/spnBudgetCategory"
+            android:id="@+id/spnAccounts"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:background="@drawable/edit_text_background"
             android:spinnerMode="dropdown" />
     </LinearLayout>
 
-    <!-- Allocated com.example.opsc7312.api.Budget Input -->
-    <LinearLayout
+    <!-- Categories List -->
+    <ListView
+        android:id="@+id/lvCategories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="24dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#000000"
+        android:dividerHeight="1dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ALLOCATED BUDGET (Under Development)"
-            android:textColor="#4CAF50"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
-
-        <EditText
-            android:id="@+id/txtBudgetDisplay"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="  (Budget Displayed)" />
-    </LinearLayout>
-
-    <!-- Divider Line -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#000000"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Create, Edit, and Delete Buttons with Icons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <!-- Create Button -->
-            <Button
-                android:id="@+id/btnMainBudgetCreate"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textSize="17sp"
-            android:background="@drawable/rounded_button_background"
-            android:gravity="center"
-            android:text="CREATE"
-
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-            <!-- Edit Button -->
-            <Button
-                android:id="@+id/btnMainEditBudget"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textSize="17sp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_button_background"
-            android:gravity="center"
-            android:text="EDIT"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-            <!-- Delete Button -->
-            <Button
-                android:id="@+id/btnMainDeleteBudget"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textSize="17sp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_button_background"
-            android:gravity="center"
-            android:text="DELETE"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Plus, Edit, and Delete Icons -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-            <!-- Create Icon -->
-            <ImageView
-                android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/create" />
-
-            <!-- Edit Icon -->
-            <ImageView
-                android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/edit" />
-
-            <!-- Delete Icon -->
-            <ImageView
-                android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/delete" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Footer Links -->
+    <!-- Add, Edit, Delete Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="32dp">
+        android:gravity="center"
+        android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/lblHelp"
+        <Button
+            android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HELP"
-            android:textColor="#4CAF50"
-            android:textSize="14sp"
-            android:onClick="onHelpClick"
-        android:layout_marginStart="20dp" />
+            android:text="ADD"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button_background"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"/>
 
-        <TextView
-            android:id="@+id/lblContactUs"
+        <Button
+            android:id="@+id/btnEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CONTACT US"
-            android:layout_marginStart="200dp"
-            android:textColor="#4CAF50"
-            android:textSize="16sp"
-            android:onClick="onContactClick"
-        android:layout_marginEnd="20dp" />
+            android:text="EDIT"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button_background"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"/>
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DELETE"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button_background"
+            android:padding="8dp"/>
     </LinearLayout>
-
 </LinearLayout>

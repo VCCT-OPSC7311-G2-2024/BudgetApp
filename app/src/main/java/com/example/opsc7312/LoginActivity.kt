@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.ComponentActivity
+import androidx.fragment.app.FragmentActivity
 import com.example.opsc7312.api.LoginRequest
 import com.example.opsc7312.api.LoginResponse
 import com.example.opsc7312.api.RetrofitClient
@@ -15,17 +15,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.security.MessageDigest
+import com.example.opsc7312.security.BiometricManager
 
-class LoginActivity : ComponentActivity() {
+class LoginActivity : FragmentActivity() {
 
     private lateinit var btnLogin: Button
     private lateinit var txtUsername: EditText
     private lateinit var txtPassword: EditText
     private lateinit var sharedPreferences: android.content.SharedPreferences
+    private lateinit var biometricManager: BiometricManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
+
+        // Initialize BiometricManager
+        biometricManager = BiometricManager(this)
 
         // Initialize UI components
         initViews()
@@ -33,18 +38,44 @@ class LoginActivity : ComponentActivity() {
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
 
+        // Check if biometric authentication is available and enabled
+        if (biometricManager.isBiometricAvailable() && biometricManager.isBiometricEnabled()) {
+            showBiometricLogin()
+        }
+
         // Set login button click listener
         btnLogin.setOnClickListener { handleLoginClick() }
     }
 
-    // Initialize UI components
     private fun initViews() {
         btnLogin = findViewById(R.id.btnLogin)
         txtUsername = findViewById(R.id.txtUsername)
         txtPassword = findViewById(R.id.txtPassword)
     }
 
-    // Handle the login button click
+    private fun showBiometricLogin() {
+        biometricManager.showBiometricPrompt(
+            this,
+            onSuccess = {
+                val storedUsername = sharedPreferences.getString("stored_username", null)
+                val storedPassword = sharedPreferences.getString("stored_password", null)
+
+                if (storedUsername != null && storedPassword != null) {
+                    // Use the stored credentials to login
+                    loginUser(storedUsername, storedPassword)
+                } else {
+                    showToast("Stored credentials not found")
+                }
+            },
+            onError = { errorMessage ->
+                showToast("Authentication error: $errorMessage")
+            },
+            onFailed = {
+                showToast("Authentication failed")
+            }
+        )
+    }
+
     private fun handleLoginClick() {
         val username = txtUsername.text.toString().trim()
         val password = txtPassword.text.toString().trim()
@@ -52,13 +83,11 @@ class LoginActivity : ComponentActivity() {
         if (username.isEmpty() || password.isEmpty()) {
             showToast("Please fill in all fields")
         } else {
-            // Hash the password before sending to API
             val hashedPassword = hashPassword(password)
             loginUser(username, hashedPassword)
         }
     }
 
-    // Function to log in the user
     private fun loginUser(username: String, password: String) {
         val request = LoginRequest(username, password)
         val call = RetrofitClient.apiService.loginUser(request)
@@ -72,10 +101,18 @@ class LoginActivity : ComponentActivity() {
                     Log.d("LoginActivity", "Response Body: $loginResponse")
 
                     if (loginResponse != null && loginResponse.message == "Login successful") {
-                        // Save userId, username, and email to SharedPreferences
+                        // Store credentials for biometric login
+                        if (biometricManager.isBiometricAvailable()) {
+                            sharedPreferences.edit().apply {
+                                putString("stored_username", username)
+                                putString("stored_password", password)
+                                apply()
+                            }
+                        }
+
+                        // Save user session
                         saveUserSession(loginResponse.userId, username, loginResponse.email)
 
-                        // Navigate to HomeActivity
                         showToast("Login successful!")
                         navigateToHome(loginResponse.email)
                     } else {
@@ -93,30 +130,25 @@ class LoginActivity : ComponentActivity() {
         })
     }
 
-    // Save the userId, username, and email to SharedPreferences
     private fun saveUserSession(userId: String, username: String, email: String) {
         val editor = sharedPreferences.edit()
         editor.putString("userId", userId)
         editor.putString("username", username)
-        editor.putString("email", email) // Save the email
+        editor.putString("email", email)
         editor.apply()
     }
 
-    // Navigate to HomeActivity
     private fun navigateToHome(email: String) {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("user_email", email) // Pass the email to HomeActivity
+        intent.putExtra("user_email", email)
         startActivity(intent)
-        finish() // Optionally finish this activity to remove it from the back stack
+        finish()
     }
 
-
-    // Show a toast message
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    // Hash the password using SHA-256
     private fun hashPassword(password: String): String {
         val digest = MessageDigest.getInstance("SHA-256")
         val hashBytes = digest.digest(password.toByteArray())
