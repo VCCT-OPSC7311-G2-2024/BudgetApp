@@ -1,7 +1,9 @@
 package com.example.opsc7312
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,11 +11,12 @@ import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.opsc7312.security.BiometricManager
+import java.util.Locale
 
 class SettingsActivity : FragmentActivity() {
 
     private lateinit var btnHome: Button
-    private lateinit var lblPersonalInfoUsername: TextView
+    private lateinit var btnLang: Button
     private lateinit var lblUsername: TextView
     private lateinit var lblEmail: TextView
     private lateinit var switchBiometric: Switch
@@ -21,6 +24,8 @@ class SettingsActivity : FragmentActivity() {
     private lateinit var tvBiometricStatus: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadAppLanguage()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_page)
 
@@ -32,11 +37,75 @@ class SettingsActivity : FragmentActivity() {
 
     private fun initializeViews() {
         btnHome = findViewById(R.id.btnHome)
-        lblPersonalInfoUsername = findViewById(R.id.lblPersonalInfoUsername)
+        btnLang = findViewById(R.id.btnLang)
         lblUsername = findViewById(R.id.lblUsername)
         lblEmail = findViewById(R.id.lblEmail)
         switchBiometric = findViewById(R.id.switchBiometric)
         tvBiometricStatus = findViewById(R.id.tvBiometricStatus)
+    }
+
+    private fun setupClickListeners() {
+        btnHome.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
+        btnLang.setOnClickListener {
+            showLanguagePickerDialog()
+        }
+    }
+
+    private fun loadAppLanguage() {
+        val sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
+        val languageCode = sharedPreferences.getString("selected_language", "en") // Default to "en"
+        if (languageCode != null) {
+            val locale = Locale(languageCode)
+            Locale.setDefault(locale)
+            val config = Configuration(resources.configuration)
+            config.setLocale(locale)
+
+            resources.updateConfiguration(config, resources.displayMetrics)
+        }
+    }
+
+
+    private fun showLanguagePickerDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_language_picker)
+        dialog.setTitle("@string/select_language")
+
+        val languageListView = dialog.findViewById<ListView>(R.id.languageListView)
+        val languages = arrayOf("English", "Afrikaans", "Zulu")
+        val languageCodes = arrayOf("en", "af", "zu")
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, languages)
+        languageListView.adapter = adapter
+
+        languageListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedLanguage = languages[position]
+            val selectedLanguageCode = languageCodes[position]
+            changeAppLanguage(selectedLanguageCode)
+            showToast(getString(R.string.selected_language, selectedLanguage))
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun changeAppLanguage(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+
+        val sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putString("selected_language", languageCode)
+            apply()
+        }
+
+        recreate()
     }
 
     private fun setupBiometricAuthentication() {
@@ -71,17 +140,17 @@ class SettingsActivity : FragmentActivity() {
             onSuccess = {
                 biometricManager.setBiometricEnabled(true)
                 updateBiometricStatus(true)
-                showToast("Biometric authentication enabled")
+                showToast(getString(R.string.biometric_authentication_enabled))
             },
             onError = { errorMessage ->
                 switchBiometric.isChecked = false
                 updateBiometricStatus(false)
-                showToast("Authentication error: $errorMessage")
+                showToast(getString(R.string.authentication_error, errorMessage))
             },
             onFailed = {
                 switchBiometric.isChecked = false
                 updateBiometricStatus(false)
-                showToast("Authentication failed")
+                showToast(getString(R.string.authentication_failed))
             }
         )
     }
@@ -89,27 +158,20 @@ class SettingsActivity : FragmentActivity() {
     private fun disableBiometric() {
         biometricManager.setBiometricEnabled(false)
         updateBiometricStatus(false)
-        showToast("Biometric authentication disabled")
+        showToast(getString(R.string.biometric_authentication_disabled))
     }
 
     private fun updateBiometricStatus(enabled: Boolean) {
         tvBiometricStatus.text = if (enabled) {
-            "Biometric authentication is enabled"
+            getString(R.string.biometric_authentication_is_enabled)
         } else {
-            "Biometric authentication is disabled"
-        }
-    }
-
-    private fun setupClickListeners() {
-        btnHome.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            getString(R.string.biometric_authentication_is_disabled)
         }
     }
 
     private fun displayUsername() {
         val sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
         val username = sharedPreferences.getString("username", "Unknown User")
-        lblPersonalInfoUsername.text = username
         lblUsername.text = username
     }
 

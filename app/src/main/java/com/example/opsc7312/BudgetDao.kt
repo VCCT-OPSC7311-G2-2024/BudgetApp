@@ -18,4 +18,10 @@ interface BudgetDao {
 
     @Query("DELETE FROM budget_actions WHERE id = :id")
     suspend fun deleteBudgetActionById(id: Int)
+
+    @Query("SELECT * FROM budget_actions WHERE actionType = 'delete' AND isSynced = 0")
+    fun getUnsyncedDeleteActions(): List<BudgetEntity>
+
+    @Update
+    fun update(budgetEntity: BudgetEntity)
 }

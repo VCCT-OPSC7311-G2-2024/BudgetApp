@@ -64,14 +64,14 @@ class LoginActivity : FragmentActivity() {
                     // Use the stored credentials to login
                     loginUser(storedUsername, storedPassword)
                 } else {
-                    showToast("Stored credentials not found")
+                    showToast(getString(R.string.stored_credentials_not_found))
                 }
             },
             onError = { errorMessage ->
-                showToast("Authentication error: $errorMessage")
+                showToast(getString(R.string.authentication_error, errorMessage))
             },
             onFailed = {
-                showToast("Authentication failed")
+                showToast(getString(R.string.authentication_failed))
             }
         )
     }
@@ -113,19 +113,19 @@ class LoginActivity : FragmentActivity() {
                         // Save user session
                         saveUserSession(loginResponse.userId, username, loginResponse.email)
 
-                        showToast("Login successful!")
+                        showToast(getString(R.string.login_successful))
                         navigateToHome(loginResponse.email)
                     } else {
-                        showToast("Login failed: ${loginResponse?.message}")
+                        showToast(getString(R.string.login_failed, loginResponse?.message))
                     }
                 } else {
-                    showToast("Error: ${response.errorBody()?.string()}")
+                    showToast(getString(R.string.error, response.errorBody()?.string()))
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e("LoginActivity", "Failed to connect: ${t.message}")
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
             }
         })
     }

@@ -59,7 +59,7 @@ class BankEditActivity : ComponentActivity() {
             userId = retrievedUserId
             fetchUserAccounts(userId)
         } else {
-            showToast("User session is missing. Please log in again.")
+            showToast(getString(R.string.user_session_is_missing_please_log_in_again))
             finish() // Close activity if no userId
         }
     }
@@ -83,12 +83,12 @@ class BankEditActivity : ComponentActivity() {
                     accountNames = response.body()!!.accounts.map { it.name }
                     populateSpinner()
                 } else {
-                    showToast("Failed to fetch accounts")
+                    showToast(getString(R.string.failed_to_fetch_accounts))
                 }
             }
 
             override fun onFailure(call: Call<AccountsResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
             }
         })
     }
@@ -110,16 +110,16 @@ class BankEditActivity : ComponentActivity() {
                     if (response.isSuccessful && response.body() != null) {
                         showToast(response.body()!!.message)
                     } else {
-                        showToast("Failed to update balance")
+                        showToast(getString(R.string.failed_to_update_balance))
                     }
                 }
 
                 override fun onFailure(call: Call<UpdateBalanceResponse>, t: Throwable) {
-                    showToast("Error: ${t.message}")
+                    showToast(getString(R.string.error, t.message))
                 }
             })
         } else {
-            showToast("Please enter a valid balance")
+            showToast(getString(R.string.please_enter_a_valid_balance))
         }
     }
 

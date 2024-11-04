@@ -36,7 +36,7 @@ class BankDeleteActivity : ComponentActivity() {
         if (userId != null) {
             fetchUserAccounts(userId)
         } else {
-            showToast("User session is missing. Please log in again.")
+            showToast(getString(R.string.user_session_is_missing_please_log_in_again))
         }
 
         // Set up spinner selection listener
@@ -47,7 +47,7 @@ class BankDeleteActivity : ComponentActivity() {
             if (selectedAccount != null && userId != null) {
                 showDeleteConfirmationDialog(userId, selectedAccount!!)
             } else {
-                showToast("Please select an account to delete.")
+                showToast(getString(R.string.please_select_an_account_to_delete))
             }
         }
 
@@ -56,6 +56,7 @@ class BankDeleteActivity : ComponentActivity() {
             navigateToHome()
         }
     }
+
 
     private fun initViews() {
         spinnerAccounts = findViewById(R.id.spnBankAccount)
@@ -91,12 +92,12 @@ class BankDeleteActivity : ComponentActivity() {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     spinnerAccounts.adapter = adapter
                 } else {
-                    showToast("Failed to fetch accounts")
+                    showToast(getString(R.string.failed_to_fetch_accounts))
                 }
             }
 
             override fun onFailure(call: Call<AccountsResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
             }
         })
     }
@@ -104,13 +105,13 @@ class BankDeleteActivity : ComponentActivity() {
     // Show confirmation dialog before deleting the account
     private fun showDeleteConfirmationDialog(userId: String, accountName: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Delete Account")
-            .setMessage("Are you sure you want to delete the account '$accountName'?")
-            .setPositiveButton("Yes") { dialog, _ ->
+        builder.setTitle(getString(R.string.delete_account))
+            .setMessage(getString(R.string.are_you_sure_you_want_to_delete_the_account, accountName))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 deleteAccount(userId, accountName) // Proceed with account deletion
                 dialog.dismiss()
             }
-            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() } // Cancel the deletion process
+            .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.dismiss() } // Cancel the deletion process
 
         builder.create().show()
     }
@@ -124,12 +125,12 @@ class BankDeleteActivity : ComponentActivity() {
                     // Refresh the spinner after deletion
                     fetchUserAccounts(userId)
                 } else {
-                    showToast("Failed to delete account")
+                    showToast(getString(R.string.failed_to_delete_account))
                 }
             }
 
             override fun onFailure(call: Call<DeleteAccountResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
             }
         })
     }
