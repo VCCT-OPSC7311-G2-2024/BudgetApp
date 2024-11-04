@@ -3,6 +3,7 @@ package com.example.opsc7312
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +15,7 @@ import com.example.opsc7312.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class BankCreateActivity : ComponentActivity() {
 
@@ -75,10 +77,10 @@ class BankCreateActivity : ComponentActivity() {
             if (userId != null) {
                 createAccount(userId, bankName, bankType, bankDeposit!!)
             } else {
-                showToast("User ID not found. Please log in again.")
+                showToast(getString(R.string.user_id_not_found_please_log_in_again))
             }
         } else {
-            showToast("Please fill in all fields correctly")
+            showToast(getString(R.string.please_fill_in_all_fields_correctly))
         }
     }
 
@@ -98,15 +100,16 @@ class BankCreateActivity : ComponentActivity() {
         RetrofitClient.apiService.addAccount(userId, request).enqueue(object : Callback<AddAccountResponse> {
             override fun onResponse(call: Call<AddAccountResponse>, response: Response<AddAccountResponse>) {
                 if (response.isSuccessful) {
-                    showToast("Account created successfully!")
+                    showToast(getString(R.string.account_created_successfully))
                     navigateToBankActivity(accountName, userId)
                 } else {
-                    showToast("Error: ${response.errorBody()?.string()}")
+                    showToast(getString(R.string.error, response.errorBody()?.string()))
                 }
             }
 
             override fun onFailure(call: Call<AddAccountResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
+                showToast(getString(R.string.failed_to_connect, t.message))
             }
         })
     }

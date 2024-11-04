@@ -2,6 +2,7 @@ package com.example.opsc7312
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -15,6 +16,7 @@ import com.example.opsc7312.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class BankActivity : ComponentActivity() {
 
@@ -40,7 +42,7 @@ class BankActivity : ComponentActivity() {
         if (userId != null) {
             fetchUserAccounts(userId)
         } else {
-            showToast("User session is missing. Please log in again.")
+            showToast(getString(R.string.user_session_is_missing_please_log_in_again))
         }
 
         // Set up spinner selection listener
@@ -49,6 +51,7 @@ class BankActivity : ComponentActivity() {
         // Set button click listeners
         setButtonListeners()
     }
+
 
     private fun initViews() {
         btnHome = findViewById(R.id.btnHome)
@@ -116,12 +119,12 @@ class BankActivity : ComponentActivity() {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     spnAccounts.adapter = adapter
                 } else {
-                    showToast("Failed to fetch accounts")
+                    showToast(getString(R.string.failed_to_fetch_accounts))
                 }
             }
 
             override fun onFailure(call: Call<AccountsResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
             }
         })
     }

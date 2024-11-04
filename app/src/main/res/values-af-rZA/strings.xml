@@ -99,4 +99,5 @@
     <string name="biometric_authentication_is_disabled">Biometriese verifikasie is gedeaktiveer</string>
     <string name="registration_successful">Registrasie suksesvol!</string>
     <string name="registration_failed">Registrasie het misluk: %1$s</string>
+    <string name="no_internet_connection">No internet connection. The delete action will be saved for later.</string>
 </resources>

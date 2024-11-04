@@ -5,8 +5,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.opsc7312.BudgetDao
-import com.example.opsc7312.BudgetEntity
 
 @Database(entities = [BudgetEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

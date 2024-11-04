@@ -1,18 +1,24 @@
 package com.example.opsc7312
 
-import com.example.opsc7312.api.AccountsResponse
-import com.example.opsc7312.api.UpdateBudgetAmountResponse
-import com.example.opsc7312.api.UpdateSpentAmountResponse
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.activity.ComponentActivity
+import com.example.opsc7312.api.AccountsResponse
+import com.example.opsc7312.api.UpdateBudgetAmountResponse
+import com.example.opsc7312.api.UpdateSpentAmountResponse
 import com.example.opsc7312.api.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import com.example.opsc7312.utils.NotificationHelper
 
 class BudgetEditActivity : ComponentActivity() {
 
@@ -22,6 +28,7 @@ class BudgetEditActivity : ComponentActivity() {
     private lateinit var txtAmountBudgeted: EditText
     private lateinit var txtAmountSpent: EditText
     private lateinit var btnHome: Button
+    private lateinit var budgetDao: BudgetDao // Declare budgetDao
 
     private var accountNames: List<String> = emptyList()
     private var selectedAccount: String? = null
@@ -33,6 +40,9 @@ class BudgetEditActivity : ComponentActivity() {
         // Initialize UI elements
         initViews()
 
+        // Initialize budgetDao
+        budgetDao = AppDatabase.getDatabase(applicationContext).budgetDao()
+
         // Retrieve userId from SharedPreferences
         val sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
         val userId = sharedPreferences.getString("userId", null)
@@ -40,7 +50,7 @@ class BudgetEditActivity : ComponentActivity() {
         if (userId != null) {
             fetchUserAccounts(userId)
         } else {
-            showToast("User session is missing. Please log in again.")
+            showToast(getString(R.string.user_session_is_missing_please_log_in_again))
         }
 
         // Set up spinner selection listener
@@ -84,28 +94,58 @@ class BudgetEditActivity : ComponentActivity() {
         val amountSpent = txtAmountSpent.text.toString().trim().toDoubleOrNull()
 
         if (category.isEmpty() || selectedAccount == null || amountBudgeted == null || amountSpent == null) {
-            showToast("Please fill in all fields correctly")
-        } else if (userId != null) {
-            updateBudget(userId, selectedAccount!!, category, amountBudgeted, amountSpent)
-        }
+            showToast(getString(R.string.please_fill_in_all_fields_correctly))
+        } else {
+            // Check if spending exceeds budget and show notification
+            if (amountSpent > amountBudgeted) {
+                NotificationHelper.showNotification(
+                    context = this,
+                    title = "Budget Alert",
+                    message = "You have exceeded your budget for $category"
+                )
+            }
+
+            // Continue with updating the budget
+            if (userId != null) {
+                updateBudget(userId, selectedAccount!!, category, amountBudgeted, amountSpent)
+            }
     }
 
     private fun fetchUserAccounts(userId: String) {
-        val call = RetrofitClient.apiService.getUserAccounts(userId)
-        call.enqueue(object : Callback<AccountsResponse> {
-            override fun onResponse(call: Call<AccountsResponse>, response: Response<AccountsResponse>) {
-                if (response.isSuccessful && response.body() != null) {
-                    accountNames = response.body()!!.accounts.map { it.name }
-                    setupAccountSpinnerAdapter()
-                } else {
-                    showToast("Failed to fetch accounts")
+        if (isNetworkAvailable()) {
+            val call = RetrofitClient.apiService.getUserAccounts(userId)
+            call.enqueue(object : Callback<AccountsResponse> {
+                override fun onResponse(call: Call<AccountsResponse>, response: Response<AccountsResponse>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        accountNames = response.body()!!.accounts.map { it.name }
+                        saveAccountsToPreferences(accountNames) // Save to preferences
+                        setupAccountSpinnerAdapter()
+                    } else {
+                        loadAccountsFromPreferences() // Load from preferences if API fails
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<AccountsResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<AccountsResponse>, t: Throwable) {
+                    loadAccountsFromPreferences() // Load from preferences on failure
+                }
+            })
+        } else {
+            loadAccountsFromPreferences() // Load from preferences if no network
+        }
+    }
+
+    private fun saveAccountsToPreferences(accounts: List<String>) {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putStringSet("account_names", accounts.toSet())
+        editor.apply()
+    }
+
+    private fun loadAccountsFromPreferences() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val accountsSet = sharedPreferences.getStringSet("account_names", emptySet())
+        accountNames = accountsSet?.toList() ?: emptyList()
+        setupAccountSpinnerAdapter()
     }
 
     private fun setupAccountSpinnerAdapter() {
@@ -126,12 +166,16 @@ class BudgetEditActivity : ComponentActivity() {
                     showToast(response.body()!!.message)
                     updateSpentAmount(userId, accountName, category, amountSpent)
                 } else {
-                    showToast("Failed to update budget amount")
+                    showToast(getString(R.string.failed_to_update_budget_amount))
+                    // Save to Room for offline
+                    saveBudgetActionToRoom(userId, accountName, category, amountBudgeted, "edit", amountSpent)
                 }
             }
 
             override fun onFailure(call: Call<UpdateBudgetAmountResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
+                // Save to Room for offline
+                saveBudgetActionToRoom(userId, accountName, category, amountBudgeted, "edit", amountSpent)
             }
         })
     }
@@ -143,17 +187,40 @@ class BudgetEditActivity : ComponentActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     showToast(response.body()!!.message)
                 } else {
-                    showToast("Failed to update spent amount")
+                    showToast(getString(R.string.failed_to_update_spent_amount))
                 }
             }
 
             override fun onFailure(call: Call<UpdateSpentAmountResponse>, t: Throwable) {
-                showToast("Failed to connect: ${t.message}")
+                showToast(getString(R.string.failed_to_connect, t.message))
             }
         })
     }
 
+    private fun saveBudgetActionToRoom(userId: String, accountName: String, category: String, amountBudgeted: Double, actionType: String, amountSpent: Double) {
+        val budgetEntity = BudgetEntity(
+            userId = userId,
+            accountName = accountName,
+            category = category,
+            amountBudgeted = amountBudgeted,
+            amountSpent = amountSpent,
+            actionType = actionType,
+            isSynced = false
+        )
+        // Use a coroutine to save to Room
+        CoroutineScope(Dispatchers.IO).launch {
+            budgetDao.insertBudgetAction(budgetEntity)
+        }
+    }
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }

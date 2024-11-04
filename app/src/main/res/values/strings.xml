@@ -79,10 +79,10 @@
     <string name="delete_category">Delete Category</string>
     <string name="are_you_sure_you_want_to_delete_the_category_from_account">Are you sure you want to delete the category \'%1$s\' from account \'%2$s\'?</string>
     <string name="category_deleted_successfully">Category \'%1$s\' deleted successfully.</string>
-    <string name="failed_to_delete_category">Failed to delete category: %1$s</string>
+    <string name="failed_to_delete_category">Failed to delete category: %1$s, syncing offline</string>
     <string name="no_categories_found_for_this_account">No categories found for this account.</string>
-    <string name="failed_to_update_budget_amount">Failed to update budget amount</string>
-    <string name="failed_to_update_spent_amount">Failed to update spent amount</string>
+    <string name="failed_to_update_budget_amount">Failed to update budget amount, syncing offline</string>
+    <string name="failed_to_update_spent_amount">Failed to update spent amount, syncing offline</string>
     <string name="welcome">"Welcome "</string>
     <string name="this_feature_is_under_development_come_back_soon">This feature is under development. Come back soon!</string>
     <string name="logout">Logout</string>
@@ -99,4 +99,5 @@
     <string name="biometric_authentication_is_disabled">Biometric authentication is disabled</string>
     <string name="registration_successful">Registration successful!</string>
     <string name="registration_failed">Registration failed: %1$s</string>
+    <string name="no_internet_connection">No internet connection. The delete action will be saved for later.</string>
 </resources>

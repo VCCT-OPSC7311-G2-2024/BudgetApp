@@ -38,7 +38,7 @@ class HomeActivity : ComponentActivity() {
         val sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE)
         val username = sharedPreferences.getString("username", "Unknown User")
 
-        lblWelcome.text = "Welcome "+username+"!"
+        lblWelcome.text = getString(R.string.welcome)+username+"!"
     }
 
 
@@ -63,7 +63,7 @@ class HomeActivity : ComponentActivity() {
         }
 
         btnSavings.setOnClickListener {
-            showFeatureUnderDevelopment()
+            navigateToActivity(SavingsActivity::class.java)
         }
 
         btnSettings.setOnClickListener {
@@ -82,7 +82,8 @@ class HomeActivity : ComponentActivity() {
 
     // Show a toast for features under development
     private fun showFeatureUnderDevelopment() {
-        Toast.makeText(this, "This feature is under development. Come back soon!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,
+            getString(R.string.this_feature_is_under_development_come_back_soon), Toast.LENGTH_SHORT).show()
     }
 
     // Function to handle user logout
@@ -102,16 +103,16 @@ class HomeActivity : ComponentActivity() {
     // Function to show logout confirmation dialog
     private fun showLogoutConfirmationDialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Logout")
-        builder.setMessage("Are you sure you want to logout?")
+        builder.setTitle(getString(R.string.logout))
+        builder.setMessage(getString(R.string.are_you_sure_you_want_to_logout))
 
         // Positive button - Logout
-        builder.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
+        builder.setPositiveButton(getString(R.string.yes)) { dialogInterface: DialogInterface, _: Int ->
             logoutUser()  // If the user confirms, log them out
         }
 
         // Negative button - Cancel
-        builder.setNegativeButton("No") { dialogInterface: DialogInterface, _: Int ->
+        builder.setNegativeButton(getString(R.string.no)) { dialogInterface: DialogInterface, _: Int ->
             dialogInterface.dismiss()  // If the user cancels, just dismiss the dialog
         }
 

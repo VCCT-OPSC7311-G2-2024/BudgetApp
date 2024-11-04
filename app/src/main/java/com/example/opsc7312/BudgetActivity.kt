@@ -2,6 +2,8 @@ package com.example.opsc7312
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -65,23 +67,30 @@ class BudgetActivity : ComponentActivity() {
     private fun fetchUserAccounts() {
         val userId = getUserIdFromPreferences()
         if (userId != null) {
-            val call = RetrofitClient.apiService.getUserAccounts(userId)
-            call.enqueue(object : Callback<AccountsResponse> {
-                override fun onResponse(call: Call<AccountsResponse>, response: Response<AccountsResponse>) {
-                    if (response.isSuccessful && response.body() != null) {
-                        accountNames = response.body()!!.accounts.map { it.name }
-                        setupAccountSpinner()
-                    } else {
-                        showToast("Failed to fetch accounts")
+            if (isNetworkAvailable()) {
+                val call = RetrofitClient.apiService.getUserAccounts(userId)
+                call.enqueue(object : Callback<AccountsResponse> {
+                    override fun onResponse(call: Call<AccountsResponse>, response: Response<AccountsResponse>) {
+                        if (response.isSuccessful && response.body() != null) {
+                            accountNames = response.body()!!.accounts.map { it.name }
+                            saveAccountsToPreferences(accountNames)
+                            setupAccountSpinner()
+                        } else {
+                            showToast(getString(R.string.failed_to_fetch_accounts))
+                            loadAccountsFromPreferences() // Load from preferences if API fails
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<AccountsResponse>, t: Throwable) {
-                    showToast("Failed to connect: ${t.message}")
-                }
-            })
+                    override fun onFailure(call: Call<AccountsResponse>, t: Throwable) {
+                        showToast(getString(R.string.failed_to_connect, t.message))
+                        loadAccountsFromPreferences() // Load from preferences on failure
+                    }
+                })
+            } else {
+                loadAccountsFromPreferences() // Load from preferences if no network
+            }
         } else {
-            showToast("User session is missing. Please log in again.")
+            showToast(getString(R.string.user_session_is_missing_please_log_in_again))
         }
     }
 
@@ -114,16 +123,16 @@ class BudgetActivity : ComponentActivity() {
                         budgetCategories = response.body()!!.budgets
                         displayCategories()
                     } else {
-                        showToast("Failed to fetch categories")
+                        showToast(getString(R.string.failed_to_fetch_categories))
                     }
                 }
 
                 override fun onFailure(call: Call<CategoriesResponse>, t: Throwable) {
-                    showToast("Failed to connect: ${t.message}")
+                    showToast(getString(R.string.failed_to_connect, t.message))
                 }
             })
         } else {
-            showToast("User session is missing. Please log in again.")
+            showToast(getString(R.string.user_session_is_missing_please_log_in_again))
         }
     }
 
@@ -139,5 +148,26 @@ class BudgetActivity : ComponentActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveAccountsToPreferences(accounts: List<String>) {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putStringSet("account_names", accounts.toSet())
+        editor.apply()
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
+    private fun loadAccountsFromPreferences() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val accountsSet = sharedPreferences.getStringSet("account_names", emptySet())
+        accountNames = accountsSet?.toList() ?: emptyList()
+        setupAccountSpinner()
     }
 }
