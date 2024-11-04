@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Home Button -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- Home Button -->
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="-13dp"
+            android:layout_height="wrap_content"
+            android:text="HOME"
+            android:textColor="#4CAF50"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+    <!-- com.example.opsc7312.api.Budget Header and Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="24dp">
+
+        <!-- com.example.opsc7312.api.Budget Header -->
+        <TextView
+            android:id="@+id/lblBudgetHeader"
+            android:layout_width="192dp"
+            android:layout_height="54dp"
+            android:layout_marginLeft="6dp"
+            android:gravity="center"
+            android:text="BUDGET"
+            android:textColor="#000000"
+            android:textSize="44sp"
+            android:textStyle="bold" />
+
+        <!-- com.example.opsc7312.api.Budget Icon -->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_marginLeft="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/budget" />
+    </LinearLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#000000"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Edit a com.example.opsc7312.api.Budget Text -->
+    <TextView
+        android:id="@+id/lblEditBudget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="EDIT A BUDGET"
+        android:textColor="#4CAF50"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- com.example.opsc7312.api.Account Dropdown -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACCOUNT"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/spinnerAccounts"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/edit_text_background"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <!-- Name and Budget Inputs -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#D1F2C9"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp">
+
+        <!-- Name Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CATEGORY NAME"
+                android:textColor="#4CAF50"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/txtCategoryName"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="  Enter Category Name" />
+        </LinearLayout>
+
+        <!-- Amount Budgeted Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AMOUNT BUDGETED"
+                android:textColor="#4CAF50"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/txtAmountBudgeted"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="  Enter Amount Budgeted" />
+        </LinearLayout>
+
+        <!-- Amount Spent Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AMOUNT SPENT"
+                android:textColor="#4CAF50"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/txtAmountSpent"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="  Enter Amount Spent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Edit Button -->
+    <Button
+        android:id="@+id/btnEditBudget"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="-21dp"
+        android:background="@drawable/rounded_button_background"
+        android:gravity="center"
+        android:text="EDIT"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <!-- Footer Links -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:id="@+id/lblHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HELP"
+            android:textColor="#4CAF50"
+            android:textSize="14sp"
+            android:onClick="onHelpClick"
+            android:layout_marginStart="20dp" />
+
+        <TextView
+            android:id="@+id/lblContactUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTACT US"
+            android:textColor="#4CAF50"
+            android:textSize="14sp"
+            android:onClick="onContactClick"
+            android:layout_marginLeft="202dp"/>
+    </LinearLayout>
+</LinearLayout>

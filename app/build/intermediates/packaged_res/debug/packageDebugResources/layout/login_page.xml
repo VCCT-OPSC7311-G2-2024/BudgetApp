@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Logo and Login Text -->
+    <LinearLayout
+        android:layout_width="530dp"
+        android:layout_height="142dp"
+        android:layout_marginLeft="-40dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Login Text -->
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="218dp"
+            android:layout_height="218dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/lblLogin"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:text="LOGIN"
+            android:textColor="#4CAF50"
+            android:textSize="44sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#000000"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Username Label -->
+    <TextView
+        android:id="@+id/lblUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USERNAME"
+        android:textColor="#4CAF50"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"/>
+
+
+    <!-- Forgot Username Text -->
+    <EditText
+        android:id="@+id/txtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="sans-serif"
+        android:hint="  Enter Username" />
+
+    <TextView
+        android:id="@+id/lblForgotUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FORGOT YOUR USERNAME?"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="end"
+        android:clickable="true"
+        android:onClick="onForgotUsernameClick"/>
+
+    <!-- Password Label -->
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PASSWORD"
+        android:textColor="#4CAF50"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="  Enter Password"
+        android:fontFamily="sans-serif" />
+
+    <!-- Forgot Password Text -->
+    <TextView
+        android:id="@+id/lblForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FORGOT YOUR PASSWORD?"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="end"
+        android:clickable="true"
+        android:onClick="onForgotPasswordClick"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="266dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_button_background"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:text="LOGIN"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <!-- Or Login With Text -->
+    <TextView
+        android:id="@+id/lblOrLoginWith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR LOGIN WITH"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"/>
+
+    <!-- Social Login Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="26dp">
+
+        <!-- Apple Login Button -->
+        <ImageButton
+            android:id="@+id/btnApple"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/apple"
+            android:scaleType="centerInside"
+            android:onClick="onAppleLoginClick"/>
+
+        <!-- Google Login Button -->
+        <ImageButton
+            android:id="@+id/btnGoogle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/google"
+            android:scaleType="centerInside"
+            android:onClick="onGoogleLoginClick"/>
+
+        <!-- Meta Login Button -->
+        <ImageButton
+            android:id="@+id/btnMeta"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/meta"
+            android:scaleType="centerInside"
+            android:onClick="onMetaLoginClick"/>
+
+    </LinearLayout>
+
+</LinearLayout>
