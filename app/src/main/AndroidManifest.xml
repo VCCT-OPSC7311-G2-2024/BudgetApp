@@ -90,7 +90,6 @@
             android:name=".SettingsActivity"
             android:exported="true" />
 
-<<<<<<< HEAD
         <receiver android:name=".NetworkReceiver"
             android:exported="false">
             <intent-filter>
@@ -98,8 +97,6 @@
             </intent-filter>
         </receiver>
 
-=======
->>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
         <service
             android:name=".services.MyFirebaseMessagingService"
             android:exported="false">
@@ -107,10 +104,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-<<<<<<< HEAD
 
-=======
->>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
 
     </application>
 
