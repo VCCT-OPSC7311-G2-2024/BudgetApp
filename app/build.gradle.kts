@@ -52,6 +52,7 @@ android {
 dependencies {
     
     implementation("androidx.biometric:biometric:1.1.0")
+    implementation ("androidx.work:work-runtime-ktx:2.7.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,6 +67,9 @@ dependencies {
     implementation(libs.loggingInterceptor)
     implementation(libs.filament.android)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

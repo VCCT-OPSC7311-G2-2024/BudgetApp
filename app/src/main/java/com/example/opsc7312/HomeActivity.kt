@@ -106,7 +106,7 @@ class HomeActivity : ComponentActivity() {
         builder.setMessage("Are you sure you want to logout?")
 
         // Positive button - Logout
-        builder.setPositiveButton("Yes") { dialogInterface: DialogInterface, _: Int ->
+        builder.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
             logoutUser()  // If the user confirms, log them out
         }
 
