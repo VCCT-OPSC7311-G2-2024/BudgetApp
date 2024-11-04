@@ -89,9 +89,13 @@
             android:name=".SettingsActivity"
             android:exported="true" />
 
-
-
-
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
     </application>
 

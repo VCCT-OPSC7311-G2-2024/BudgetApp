@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "290812901281",
+    "firebase_url": "https://budgetplanner-39d2f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "budgetplanner-39d2f",
+    "storage_bucket": "budgetplanner-39d2f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290812901281:android:0110687b5e91d35760bde0",
+        "android_client_info": {
+          "package_name": "com.example.opsc7312"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcaS7CJL2XGeMrT0a0ana_sehHg3NGLwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

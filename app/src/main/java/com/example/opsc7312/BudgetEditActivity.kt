@@ -3,6 +3,7 @@ package com.example.opsc7312
 import com.example.opsc7312.api.AccountsResponse
 import com.example.opsc7312.api.UpdateBudgetAmountResponse
 import com.example.opsc7312.api.UpdateSpentAmountResponse
+import com.example.opsc7312.utils.NotificationHelper
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -85,8 +86,20 @@ class BudgetEditActivity : ComponentActivity() {
 
         if (category.isEmpty() || selectedAccount == null || amountBudgeted == null || amountSpent == null) {
             showToast("Please fill in all fields correctly")
-        } else if (userId != null) {
-            updateBudget(userId, selectedAccount!!, category, amountBudgeted, amountSpent)
+        } else {
+            // Check if spending exceeds budget and show notification
+            if (amountSpent > amountBudgeted) {
+                NotificationHelper.showNotification(
+                    context = this,
+                    title = "Budget Alert",
+                    message = "You have exceeded your budget for $category"
+                )
+            }
+
+            // Continue with updating the budget
+            if (userId != null) {
+                updateBudget(userId, selectedAccount!!, category, amountBudgeted, amountSpent)
+            }
         }
     }
 

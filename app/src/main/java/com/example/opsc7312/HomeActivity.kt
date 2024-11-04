@@ -63,7 +63,7 @@ class HomeActivity : ComponentActivity() {
         }
 
         btnSavings.setOnClickListener {
-            showFeatureUnderDevelopment()
+            navigateToActivity(SavingsActivity::class.java)
         }
 
         btnSettings.setOnClickListener {
