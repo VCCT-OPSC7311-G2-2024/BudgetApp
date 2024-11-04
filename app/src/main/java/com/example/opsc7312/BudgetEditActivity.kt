@@ -1,5 +1,12 @@
 package com.example.opsc7312
 
+<<<<<<< HEAD
+=======
+import com.example.opsc7312.api.AccountsResponse
+import com.example.opsc7312.api.UpdateBudgetAmountResponse
+import com.example.opsc7312.api.UpdateSpentAmountResponse
+import com.example.opsc7312.utils.NotificationHelper
+>>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -94,7 +101,11 @@ class BudgetEditActivity : ComponentActivity() {
         val amountSpent = txtAmountSpent.text.toString().trim().toDoubleOrNull()
 
         if (category.isEmpty() || selectedAccount == null || amountBudgeted == null || amountSpent == null) {
+<<<<<<< HEAD
             showToast(getString(R.string.please_fill_in_all_fields_correctly))
+=======
+            showToast("Please fill in all fields correctly")
+>>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
         } else {
             // Check if spending exceeds budget and show notification
             if (amountSpent > amountBudgeted) {
@@ -109,6 +120,7 @@ class BudgetEditActivity : ComponentActivity() {
             if (userId != null) {
                 updateBudget(userId, selectedAccount!!, category, amountBudgeted, amountSpent)
             }
+<<<<<<< HEAD
         }
     }
     private fun fetchUserAccounts(userId: String) {
@@ -131,6 +143,8 @@ class BudgetEditActivity : ComponentActivity() {
             })
         } else {
             loadAccountsFromPreferences() // Load from preferences if no network
+=======
+>>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
         }
     }
 
