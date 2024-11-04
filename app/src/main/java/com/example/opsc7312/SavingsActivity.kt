@@ -77,30 +77,6 @@ class SavingsActivity : ComponentActivity() {
         } catch (e: Exception) {
             showToast("Please enter valid numbers")
         }
-<<<<<<< HEAD
-=======
-    }
-
-    private fun calculateSimpleInterest(principal: Double, rate: Double, time: Double): Double {
-        return principal * (1 + rate * time)
-    }
-
-    private fun calculateCompoundInterest(
-        principal: Double,
-        rate: Double,
-        time: Double,
-        compoundingFrequency: Int
-    ): Double {
-        return principal * (1 + rate / compoundingFrequency).pow(compoundingFrequency * time)
-    }
-
-    private fun displayResult(amount: Double) {
-        txtResult.text = String.format("Final Amount: R%.2f", amount)
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
->>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
     }
 
     private fun calculateSimpleInterest(principal: Double, rate: Double, time: Double): Double {
