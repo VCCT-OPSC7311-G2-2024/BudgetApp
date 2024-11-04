@@ -1,11 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-<<<<<<< HEAD
     id("com.google.devtools.ksp") version "2.0.21-1.0.26"
     alias(libs.plugins.kotlinCompose)
-=======
->>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
     id("com.google.gms.google-services")
 }
 
@@ -96,13 +93,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.firebase:firebase-messaging-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-<<<<<<< HEAD
-}
 
 ksp {
     arg("ksp.kotlin.generated", "$buildDir/generated/source/kspKotlin/")
 }
-
-=======
-}
->>>>>>> 484ea648b22cdb69fbc4c997aee5d145eec2f062
