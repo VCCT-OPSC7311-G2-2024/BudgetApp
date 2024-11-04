@@ -39,6 +39,32 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
+      # Add this step to create dummy google-services.json
+      - name: Create Google Services JSON
+        run: |
+          echo '{
+            "project_info": {
+              "project_number": "123456789",
+              "project_id": "dummy-project",
+              "storage_bucket": "dummy-project.appspot.com"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:123456789:android:abcdef123456",
+                  "android_client_info": {
+                    "package_name": "com.example.opsc7312"
+                  }
+                },
+                "api_key": [
+                  {
+                    "current_key": "dummy_api_key"
+                  }
+                ]
+              }
+            ]
+          }' > app/google-services.json
+
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
